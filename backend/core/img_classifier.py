@@ -63,12 +63,3 @@ async def classifier(img_filepath):
     predicted_category = hero_labels[predicted_index]
 
     in_mem_db["predicted_category"] = predicted_category
-    # return predicted_category
-
-
-async def testando():
-    i = 0
-    while True:
-        yield f"Testando {i}"
-        await asyncio.sleep(1)
-        i += 1

@@ -15,7 +15,7 @@ yarn-error.log
 yarn.lock
 
 # Ignore the contents of the data_input folder
-data_input/*.jp*g
+backend/data_input/*.jp*g
 
 # IDE and editor files
 .vscode/
