@@ -1,0 +1,50 @@
+# Python-related files and directories
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+*.log
+*.sqlite3
+
+# Node.js-related files and directories
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn.lock
+
+# Ignore the contents of the data_input folder
+data_input/*.jp*g
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+*.komodotools
+*.tmproj
+*.tmod
+
+# Compiled and generated files
+*.pyc
+*.pyo
+*.class
+*.war
+*.ear
+*.jar
+*.exe
+*.dll
+*.so
+*.dylib
+*.app
+*.out
+*.swp
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+Icon?
+ehthumbs.db
+desktop.ini

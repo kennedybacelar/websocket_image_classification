@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  backend:
+    container_name: my_backend
+    image: python:3.10
+    volumes:
+      - ./backend:/backend
+    working_dir: /backend
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - 8050:8050
+    command: sh -c "pip install -r requirements.txt && python -m api.main"

@@ -1,0 +1,6 @@
+models:
+  paths:
+    model: models/heroes.h5
+    indices: models/heroes_class_indices.json
+data:
+  input: data_input
