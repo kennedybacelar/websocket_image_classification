@@ -19,6 +19,8 @@ services:
     volumes:
       - ./:/frontend
     working_dir: /frontend
+    environment:
+      - IS_DOCKER=true
     command: sh -c "npm install && npm config set loglevel warn && npm start"
     ports:
       - 3020:3020

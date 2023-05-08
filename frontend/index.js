@@ -4,6 +4,9 @@ const fs = require('fs');
 const app = express()
 const port = 3020
 
+const isDocker = process.env.IS_DOCKER === 'true'
+
+
 app.use(express.static('public'));
 
 const getRandFilePath = (folderName) => {
@@ -37,6 +40,11 @@ app.get('/get-random-quote/:folderName', (req, res) => {
     const folderName = req.params.folderName;
     const randomQuote = getRandomQuote(folderName);
     res.send(randomQuote);
+})
+
+app.get('/backend-prefix', (req, res) => {
+    const hostname = isDocker ? 'backend' : 'localhost'
+    res.send(hostname)
 })
 
 app.listen(port, () => {

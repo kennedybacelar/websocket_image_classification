@@ -54,32 +54,35 @@
 <script>
     const backend_port = 8050
     const frontend_port = 3020
-    const ws = new WebSocket(`ws://localhost:${backend_port}/ws`)
 
-    ws.addEventListener('open', () => {
-        ws.send('Hello from frontend');
-    });
+    fetch('/backend-prefix')
+        .then(response => response.text())
+        .then(backendPrefix => {
+            const ws = new WebSocket(`ws://${backendPrefix}:${backend_port}/ws`)
 
-    ws.addEventListener('message', (event) => {
-        const folderName = event.data;
-        fetch(`/get-random-filepath/${folderName}`)
-            .then(response => response.text())
-            .then(filepath => {
-                console.log(filepath);
-                const imageElement = document.getElementById('myImage');
-                imageElement.src = `http://localhost:${frontend_port}${filepath}`;
+            ws.addEventListener('open', () => {
+                ws.send('Hello from frontend');
             });
 
-        fetch(`/get-random-quote/${folderName}`)
-            .then(response => response.text())
-            .then(randomQuote => {
-                console.log(randomQuote);
-                const quoteElement = document.getElementById('myQuote');
-                quoteElement.innerHTML = randomQuote;
-            })
+            ws.addEventListener('message', (event) => {
+                const folderName = event.data;
+                fetch(`/get-random-filepath/${folderName}`)
+                    .then(response => response.text())
+                    .then(filepath => {
+                        console.log(filepath);
+                        const imageElement = document.getElementById('myImage');
+                        imageElement.src = `http://localhost:${frontend_port}${filepath}`;
+                    });
 
-
-    });
+                fetch(`/get-random-quote/${folderName}`)
+                    .then(response => response.text())
+                    .then(randomQuote => {
+                        console.log(randomQuote);
+                        const quoteElement = document.getElementById('myQuote');
+                        quoteElement.innerHTML = randomQuote;
+                    })
+            });
+        })
 
 
 </script>
