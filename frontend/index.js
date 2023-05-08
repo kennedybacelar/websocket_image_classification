@@ -15,6 +15,13 @@ const getRandFilePath = (folderName) => {
     return path.join('/', 'images_ext_storage_mock', folderName, randomImageFile);
 };
 
+const getRandomQuote = (folderName) => {
+    const quotesFilePath = path.join(__dirname, 'public', 'images_ext_storage_mock', '_quotes', folderName + '.txt');
+    const quotes = fs.readFileSync(quotesFilePath, { encoding: 'utf8' }).split('\n');
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    return randomQuote.trim();
+};
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
@@ -25,6 +32,12 @@ app.get('/get-random-filepath/:folderName', (req, res) => {
     const filePath = getRandFilePath(folderName);
     res.send(filePath);
 });
+
+app.get('/get-random-quote/:folderName', (req, res) => {
+    const folderName = req.params.folderName;
+    const randomQuote = getRandomQuote(folderName);
+    res.send(randomQuote);
+})
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)

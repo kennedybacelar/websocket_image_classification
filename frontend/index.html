@@ -27,6 +27,18 @@
             font-size: 24px;
             font-weight: bold;
             text-align: center;
+            line-height: 1.2;
+            /* Set the default line height */
+        }
+
+        /* Increase the line height for longer text */
+        .frame p.long {
+            line-height: 1.5;
+        }
+
+        /* Decrease the line height for shorter text */
+        .frame p.short {
+            line-height: 1;
         }
     </style>
 </head>
@@ -34,11 +46,15 @@
 <body>
     <div class="frame">
         <img id="myImage" src="/images_ext_storage_mock/default/loading.jpg" alt="My Image">
+    </div>
+    <div class="frame">
         <p id="myQuote"></p>
     </div>
 </body>
 <script>
-    const ws = new WebSocket('ws://localhost:8050/ws')
+    const backend_port = 8050
+    const frontend_port = 3020
+    const ws = new WebSocket(`ws://localhost:${backend_port}/ws`)
 
     ws.addEventListener('open', () => {
         ws.send('Hello from frontend');
@@ -49,10 +65,20 @@
         fetch(`/get-random-filepath/${folderName}`)
             .then(response => response.text())
             .then(filepath => {
-                console.log(filepath)
+                console.log(filepath);
                 const imageElement = document.getElementById('myImage');
-                imageElement.src = `http://localhost:3020${filepath}`;
+                imageElement.src = `http://localhost:${frontend_port}${filepath}`;
             });
+
+        fetch(`/get-random-quote/${folderName}`)
+            .then(response => response.text())
+            .then(randomQuote => {
+                console.log(randomQuote);
+                const quoteElement = document.getElementById('myQuote');
+                quoteElement.innerHTML = randomQuote;
+            })
+
+
     });
 
 
