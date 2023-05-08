@@ -17,7 +17,7 @@ services:
     container_name: my_frontend_img_class
     image: node:alpine
     volumes:
-      - ./:/frontend
+      - ./frontend:/frontend
     working_dir: /frontend
     environment:
       - IS_DOCKER=true
