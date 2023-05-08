@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   backend:
-    container_name: my_backend
+    container_name: my_backend_img_class
     image: python:3.10
     volumes:
       - ./backend:/backend
@@ -12,3 +12,13 @@ services:
     ports:
       - 8050:8050
     command: sh -c "pip install -r requirements.txt && python -m api.main"
+
+  frontend:
+    container_name: my_frontend_img_class
+    image: node:alpine
+    volumes:
+      - ./:/frontend
+    working_dir: /frontend
+    command: sh -c "npm install && npm config set loglevel warn && npm start"
+    ports:
+      - 3020:3020
