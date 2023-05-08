@@ -17,6 +17,9 @@ yarn.lock
 # Ignore the contents of the data_input folder
 backend/data_input/*.jp*g
 
+frontend/public/images_ext_storage_mock/**/*.jpg
+frontend/public/images_ext_storage_mock/**/*.jpeg
+
 # IDE and editor files
 .vscode/
 .idea/
