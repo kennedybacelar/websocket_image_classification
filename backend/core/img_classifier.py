@@ -29,7 +29,9 @@ def get_data_input_filepath() -> Optional[str]:
 
 
 def _get_filepath():
-    return os.listdir("data_input")[0] if os.listdir("data_input") else None
+    all_files = [f for f in os.listdir("data_input") if f.endswith((".jpg", ".jpeg"))]
+    filepath = all_files[0] if all_files else None
+    return filepath
 
 
 async def process_classification():
@@ -38,6 +40,8 @@ async def process_classification():
     task = None
     while True:
         if not current_filepath or (current_filepath != previous_filepath):
+            if current_filepath is not None:
+                previous_filepath = current_filepath
             if task is not None and not task.done():
                 task.cancel()  # Cancel previous task if it's still running
             final_filepath = os.path.join(
@@ -46,7 +50,7 @@ async def process_classification():
             task = asyncio.create_task(classifier(final_filepath))
         yield in_mem_db.get("predicted_category")
         current_filepath = _get_filepath()
-        await asyncio.sleep(1)
+        await asyncio.sleep(4)
 
 
 async def classifier(img_filepath):

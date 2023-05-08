@@ -15,8 +15,9 @@ async def img_classification(websocket: WebSocket):
     await websocket.accept()
     i = 0
     async for predicted_category in process_classification():
-        await websocket.send_text(f"{predicted_category} - {i}")
+        print(predicted_category, i)
         i += 1
+        await websocket.send_text(predicted_category)
 
 
 if __name__ == "__main__":

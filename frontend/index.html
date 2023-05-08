@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Page</title>
+    <style>
+        /* Style the frame */
+        .frame {
+            border: 2px solid black;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Style the image */
+        .frame img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        /* Style the quote */
+        .frame p {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="frame">
+        <img id="myImage" src="/images_ext_storage_mock/default/loading.jpg" alt="My Image">
+        <p id="myQuote"></p>
+    </div>
+</body>
+<script>
+    const ws = new WebSocket('ws://localhost:8050/ws')
+
+    ws.addEventListener('open', () => {
+        ws.send('Hello from frontend');
+    });
+
+    ws.addEventListener('message', (event) => {
+        const folderName = event.data;
+        fetch(`/get-random-filepath/${folderName}`)
+            .then(response => response.text())
+            .then(filepath => {
+                console.log(filepath)
+                const imageElement = document.getElementById('myImage');
+                imageElement.src = `http://localhost:3020${filepath}`;
+            });
+    });
+
+
+</script>
+
+</html>
