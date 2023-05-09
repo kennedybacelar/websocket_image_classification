@@ -21,7 +21,9 @@
     fetch('/backend-prefix')
         .then(response => response.text())
         .then(backendPrefix => {
-            const ws = new WebSocket(`ws://${backendPrefix}:${backend_port}/ws`)
+            // Not able to conncet to backend with the service name as domain name - correct it.
+            // const ws = new WebSocket(`ws://${backendPrefix}:${backend_port}/ws`)
+            const ws = new WebSocket(`ws://localhost:${backend_port}/ws`)
 
             ws.addEventListener('open', () => {
                 ws.send('Hello from frontend');
