@@ -8,6 +8,7 @@ const isDocker = process.env.IS_DOCKER === 'true'
 
 
 app.use(express.static('public'));
+app.use('/css', express.static(path.join(__dirname, 'css')));
 
 const getRandFilePath = (folderName) => {
     const folderPath = path.join(__dirname, 'public', 'images_ext_storage_mock', folderName);
