@@ -29,21 +29,24 @@
 
             ws.addEventListener('message', (event) => {
                 const folderName = event.data;
-                fetch(`/get-random-filepath/${folderName}`)
-                    .then(response => response.text())
-                    .then(filepath => {
-                        console.log(filepath);
-                        const imageElement = document.getElementById('myImage');
-                        imageElement.src = `http://localhost:${frontend_port}${filepath}`;
-                    });
+                if (folderName.trim().length > 0) {
+                    fetch(`/get-random-filepath/${folderName}`)
+                        .then(response => response.text())
+                        .then(filepath => {
+                            console.log(filepath);
+                            const imageElement = document.getElementById('myImage');
+                            imageElement.src = `http://localhost:${frontend_port}${filepath}`;
+                        });
 
-                fetch(`/get-random-quote/${folderName}`)
-                    .then(response => response.text())
-                    .then(randomQuote => {
-                        console.log(randomQuote);
-                        const quoteElement = document.getElementById('myQuote');
-                        quoteElement.innerHTML = randomQuote;
-                    })
+                    fetch(`/get-random-quote/${folderName}`)
+                        .then(response => response.text())
+                        .then(randomQuote => {
+                            console.log(randomQuote);
+                            const quoteElement = document.getElementById('myQuote');
+                            quoteElement.innerHTML = randomQuote;
+                        })
+                }
+
             });
         })
 

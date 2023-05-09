@@ -48,7 +48,7 @@ async def process_classification():
                 global_config["data"]["input"], previous_filepath
             )
             task = asyncio.create_task(classifier(final_filepath))
-        yield in_mem_db.get("predicted_category")
+        yield in_mem_db.get("predicted_category", "")
         current_filepath = _get_filepath()
         await asyncio.sleep(4)
 
