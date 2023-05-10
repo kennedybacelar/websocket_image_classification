@@ -2,7 +2,7 @@ import os
 import json
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from model import build_model
+from models.model import build_model
 from config import load_config
 
 global_config = load_config()
