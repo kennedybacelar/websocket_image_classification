@@ -20,11 +20,31 @@ List of prerequisites required to run the project.
 
 ## Installation
 
-Steps to install and set up the project.
+If you run it on docker no manual installation is required. Just enter the docker-compose command in the following section.
+
+If you run as independent servers:
+
+At the backend folder run:
+```bash
+pip install -r requirements.txt
+```
+At the frontend folder run:
+```bash
+npm install
+```
 
 ## Usage
 
 Instructions on how to use the project.
+
+The project can be run as a whole piece through docker by entering the command:
+
+```bash
+docker-compose up --build
+```
+
+Or it can be started as a backend and frontend separated through the commands below:
+
 
 To spin off the server, navigate to the backend folder and run:
 
