@@ -4,3 +4,14 @@ models:
     indices: models/heroes_class_indices.json
 data:
   input: data_input
+
+train:
+  params:
+    batch_size: 32
+    epochs: 10
+    validation_split: 0.4
+
+  resources:
+    train_dataset: "data/assets/heroes"
+    ignore_folders:
+      - "_quotes"
