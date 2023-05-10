@@ -13,7 +13,11 @@ def train():
         "TF_CPP_MIN_LOG_LEVEL"
     ] = "3"
 
-    data_directory = "data/assets/heroes"
+    data_directory = (
+        global_config.get("train", {})
+        .get("resources", {})
+        .get("train_dataset", "train_dataset")
+    )
 
     # Set the parameters for data preprocessing and augmentation
     image_size = (224, 224)

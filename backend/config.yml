@@ -12,6 +12,6 @@ train:
     validation_split: 0.4
 
   resources:
-    train_dataset: "data/assets/heroes"
+    train_dataset: "train_dataset"
     ignore_folders:
       - "_quotes"
