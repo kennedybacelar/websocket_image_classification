@@ -18,24 +18,21 @@ Instructions on how to use the project.
 
 To spin off the server, navigate to the backend folder and run:
 
+```bash
 python -m api.main
-
-css
-Copy code
+```
 
 To start the frontend, navigate to the root folder and run:
 
+```bash
 npm start
-
-arduino
-Copy code
+```
 
 If you want to train the models, run the following command in the backend folder:
 
+```bash
 python -m models.train
-
-shell
-Copy code
+```
 
 ## Contributing
 
