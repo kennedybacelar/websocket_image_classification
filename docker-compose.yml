@@ -9,9 +9,11 @@ services:
     working_dir: /backend
     environment:
       - PYTHONUNBUFFERED=1
+      - CUDA_VISIBLE_DEVICES=""  # Prevent TensorFlow from using the GPU
+      - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python  # Use pure Python implementation for protocol buffers
     ports:
       - 8050:8050
-    command: sh -c "pip install -r requirements.txt && python -m api.main"
+    command: sh -c "pip install poetry && poetry install && poetry run python -m api.main"
 
   frontend:
     container_name: my_frontend_img_class
@@ -24,3 +26,12 @@ services:
     command: sh -c "npm install && npm config set loglevel warn && npm start"
     ports:
       - 3020:3020
+  
+  messaging:
+    container_name: rabbitmq_img_class
+    image: rabbitmq:3-management
+    ports:
+      - 5772:5672
+      - 15772:15672
+    restart: always
+    

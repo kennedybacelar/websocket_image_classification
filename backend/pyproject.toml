@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = ""
+authors = ["kennedy bacelar <kennedybacelar@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+uvicorn = "^0.30.1"
+fastapi = "^0.111.0"
+pyyaml = "^6.0.1"
+pyaml = "^24.4.0"
+websockets = "^12.0"
+pillow = "^10.4.0"
+tensorflow-io-gcs-filesystem = { version = "*", python = ">=3.10,<3.12" }
+tensorflow-cpu = "2.8.0"
+protobuf = "<=3.20.3"
+numpy = "<2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

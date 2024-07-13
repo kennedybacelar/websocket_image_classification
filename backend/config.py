@@ -1,4 +1,4 @@
-from pyaml import yaml
+import yaml
 
 
 def load_config() -> dict:
