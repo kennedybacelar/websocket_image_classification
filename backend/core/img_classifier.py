@@ -5,6 +5,10 @@ from typing import Optional, List
 from config import load_config
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 global_config = load_config()
 in_mem_db = {}
@@ -55,7 +59,7 @@ async def process_classification():
 
 async def classifier(img_filepath):
 
-    model = load_model(global_config["models"]["paths"]["model"])
+    model = load_model(global_config["models"]["paths"]["model"], compile=False)
     img = preprocess_image(img_filepath)
 
     prediction = model.predict(img)
