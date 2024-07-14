@@ -4,6 +4,9 @@ models:
     indices: models/heroes_class_indices.json
 data:
   input: data_input
+rabbitmq:
+  host: "localhost"
+  port: 5772
 
 train:
   params:

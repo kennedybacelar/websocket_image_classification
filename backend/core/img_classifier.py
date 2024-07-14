@@ -1,11 +1,14 @@
-import os
 import asyncio
 import json
-from typing import Optional, List
-from config import load_config
+import logging
+import os
+from typing import List, Optional
+
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-import logging
+
+from config import load_config
+from messaging import get_rabbitmq_connection, publish_message
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -48,9 +51,7 @@ async def process_classification():
                 previous_filepath = current_filepath
             if task is not None and not task.done():
                 task.cancel()  # Cancel previous task if it's still running
-            final_filepath = os.path.join(
-                global_config["data"]["input"], previous_filepath
-            )
+            final_filepath = os.path.join(global_config["data"]["input"], previous_filepath)
             task = asyncio.create_task(classifier(final_filepath))
         yield in_mem_db.get("predicted_category", "")
         current_filepath = _get_filepath()
@@ -71,3 +72,13 @@ async def classifier(img_filepath):
     predicted_category = hero_labels[predicted_index]
 
     in_mem_db["predicted_category"] = predicted_category
+
+    # Create tasks for publishing messages without awaiting them
+    asyncio.create_task(
+        publish_message(event={"message": "New hero detected", "hero": predicted_category}, routing_key="events")
+    )
+    asyncio.create_task(
+        publish_message(
+            event={"message": "Hero smashing", "hero": predicted_category}, routing_key=f"hero.{predicted_category}"
+        )
+    )
