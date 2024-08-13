@@ -1,0 +1,5 @@
+{
+    "backendHost": "localhost",
+    "backendPort": 8050,
+    "frontendPort": 3020
+}

@@ -18,12 +18,14 @@
     const backend_port = 8050
     const frontend_port = 3020
 
-    fetch('/backend-prefix')
-        .then(response => response.text())
-        .then(backendPrefix => {
-            // Not able to conncet to backend with the service name as domain name - correct it.
-            // const ws = new WebSocket(`ws://${backendPrefix}:${backend_port}/ws`)
-            const ws = new WebSocket(`ws://localhost:${backend_port}/ws`)
+    fetch('/config.json')
+        .then(response => response.json())
+        .then(config => {
+            const backendHost = config.backendHost;
+            const backendPort = config.backendPort;
+            const frontendPort = config.frontendPort;
+            
+            const ws = new WebSocket(`ws://${backendHost}:${backendPort}/ws`);
 
             ws.addEventListener('open', () => {
                 ws.send('Hello from frontend');
@@ -37,7 +39,7 @@
                         .then(filepath => {
                             console.log(filepath);
                             const imageElement = document.getElementById('myImage');
-                            imageElement.src = `http://localhost:${frontend_port}${filepath}`;
+                            imageElement.src = `http://${backendHost}:${frontend_port}${filepath}`;
                         });
 
                     fetch(`/get-random-quote/${folderName}`)
