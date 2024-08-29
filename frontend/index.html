@@ -13,6 +13,14 @@
     <div class="frame">
         <p id="myQuote"></p>
     </div>
+
+    <div class="upload-container">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input type="file" name="file" id="imageUpload">
+                <button type="submit">Upload Image</button>
+            </form>
+            <p id="uploadStatus"></p>
+    </div>
 </body>
 <script>
     const backend_port = 8050
@@ -53,6 +61,32 @@
 
             });
         })
+    
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData();
+            const imageFile = document.getElementById('imageUpload').files[0];
+
+            if (imageFile) {
+                formData.append('file', imageFile);  // Ensure the field name matches what the backend expects
+
+                fetch('http://localhost:8050/upload', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(status => {
+                    document.getElementById('uploadStatus').innerText = status;
+                })
+                .catch(error => {
+                    document.getElementById('uploadStatus').innerText = 'Error uploading file.';
+                    console.error(error);
+                });
+            } else {
+                document.getElementById('uploadStatus').innerText = 'No file selected.';
+            }
+    });
 
 
 </script>

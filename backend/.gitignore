@@ -2,6 +2,7 @@ train_dataset/**/*.jpg
 train_dataset/**/*.jpeg
 train_dataset/**/*.webp
 data_input/
+models/backup/
 
 # asdf
 .tool-versions

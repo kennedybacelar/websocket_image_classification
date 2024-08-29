@@ -34,3 +34,14 @@
 .frame p.short {
     line-height: 1;
 }
+
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#uploadForm {
+    margin-top: 10px;
+}

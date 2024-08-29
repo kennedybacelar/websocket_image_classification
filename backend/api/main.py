@@ -3,11 +3,19 @@ import shutil
 
 import uvicorn
 from fastapi import FastAPI, File, HTTPException, UploadFile, WebSocket
+from starlette.middleware.cors import CORSMiddleware
 
 from core.api_core import process_and_store_image
 from core.img_classifier import process_classification
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3020"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
@@ -27,7 +35,7 @@ async def img_classification(websocket: WebSocket):
 
 @app.post("/upload/")
 async def upload_image(file: UploadFile = File(...)):
-    
+
     try:
         await process_and_store_image(file.file.read(), file.filename)
         return {"filename": file.filename, "message": "Image uploaded successfully"}
