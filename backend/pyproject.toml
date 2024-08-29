@@ -19,6 +19,7 @@ protobuf = "<=3.20.3"
 numpy = "<2"
 aio-pika = "^9.4.2"
 scipy = "^1.14.0"
+python-multipart = "^0.0.9"
 
 
 [tool.poetry.group.extras.dependencies]

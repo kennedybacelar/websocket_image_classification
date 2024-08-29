@@ -1,7 +1,9 @@
-from aio_pika import Connection, connect_robust
-from config import load_config
-import aio_pika
 import json
+
+import aio_pika
+from aio_pika import Connection, connect_robust
+
+from config import load_config
 
 global_config = load_config()
 

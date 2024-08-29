@@ -2,13 +2,13 @@ import asyncio
 import json
 import logging
 import os
-from typing import List, Optional
+from typing import Optional
 
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
 from config import load_config
-from messaging import get_rabbitmq_connection, publish_message
+from messaging import publish_message
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

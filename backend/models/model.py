@@ -1,11 +1,10 @@
 import os
-import tensorflow as tf
-from tensorflow.keras.layers import GlobalAveragePooling2D, Dense
-from tensorflow.keras.applications import MobileNetV2
 
-os.environ[
-    "TF_CPP_MIN_LOG_LEVEL"
-] = "3"  # Set TensorFlow logging level to suppress warnings
+import tensorflow as tf
+from tensorflow.keras.applications import MobileNetV2
+from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
+
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # Set TensorFlow logging level to suppress warnings
 
 
 def build_model(input_shape, num_classes):
