@@ -60,35 +60,33 @@
                 }
 
             });
+
+            document.getElementById('uploadForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const formData = new FormData();
+                const imageFile = document.getElementById('imageUpload').files[0];
+
+                if (imageFile) {
+                    formData.append('file', imageFile);  // Ensure the field name matches what the backend expects
+
+                    fetch(`http://${backendHost}:${backendPort}/upload`, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(status => {
+                        document.getElementById('uploadStatus').innerText = status;
+                    })
+                    .catch(error => {
+                        document.getElementById('uploadStatus').innerText = 'Error uploading file.';
+                        console.error(error);
+                    });
+                } else {
+                    document.getElementById('uploadStatus').innerText = 'No file selected.';
+                }
+            });
         })
-    
-        document.getElementById('uploadForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const formData = new FormData();
-            const imageFile = document.getElementById('imageUpload').files[0];
-
-            if (imageFile) {
-                formData.append('file', imageFile);  // Ensure the field name matches what the backend expects
-
-                fetch(`http://${backendHost}:${backendPort}/upload`, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.text())
-                .then(status => {
-                    document.getElementById('uploadStatus').innerText = status;
-                })
-                .catch(error => {
-                    document.getElementById('uploadStatus').innerText = 'Error uploading file.';
-                    console.error(error);
-                });
-            } else {
-                document.getElementById('uploadStatus').innerText = 'No file selected.';
-            }
-    });
-
 
 </script>
-
 </html>

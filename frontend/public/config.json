@@ -1,5 +1,5 @@
 {
-    "backendHost": "localhost",
+    "backendHost": "192.168.100.117",
     "backendPort": 8050,
     "frontendPort": 3020
 }
