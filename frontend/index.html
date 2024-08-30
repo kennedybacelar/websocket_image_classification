@@ -71,7 +71,7 @@
             if (imageFile) {
                 formData.append('file', imageFile);  // Ensure the field name matches what the backend expects
 
-                fetch('http://localhost:8050/upload', {
+                fetch(`http://${backendHost}:${backendPort}/upload`, {
                     method: 'POST',
                     body: formData
                 })
