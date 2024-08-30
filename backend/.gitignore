@@ -1,6 +1,6 @@
-train_dataset/**/*.jpg
-train_dataset/**/*.jpeg
-train_dataset/**/*.webp
+train_dataset/*/*.jpg
+train_dataset/*/*.jpeg
+train_dataset/*/*.webp
 data_input/*.jpg
 data_input/*.jepg
 models/backup/
