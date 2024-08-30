@@ -1,6 +1,6 @@
 services:
   backend:
-    container_name: my_backend_img_class
+    container_name: my_backend
     image: python:3.10
     volumes:
       - ./backend:/backend
@@ -14,7 +14,7 @@ services:
     command: sh -c "pip install poetry && poetry install && poetry run python -m api.main"
 
   frontend:
-    container_name: my_frontend_img_class
+    container_name: my_frontend
     image: node:alpine
     volumes:
       - ./frontend:/frontend
